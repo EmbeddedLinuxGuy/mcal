@@ -1,59 +1,72 @@
 <!doctype html>
 <html>
 <head>
-<title>Maya Calandar</title>
+<title>Maya Calendar</title>
 <style>
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-#num_seconds {
-  float: none;
-  border: none
-}
 div {
+  margin: 0px;
+  padding: 0px;
+}
+
+.column {
   float: left;
   display: inline-block;
-  margin: 0;
-  padding: 0;
   text-align: center;
 }
-div#date {
+
+#gregorian {
+  margin: 0px;
+}
+
+#date {
   margin-left: 20px;
   margin-right: 20px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
+
 </style>
 </head>
 <body>
-  <h1>Maya Calandar Countdown to Winter Solstice 2012</h1>
-  <div>2011<br />
-    <div><img src="maya/1.png" /></div>
-    <div><img src="maya/20.png" /></div>
-    <div><img src="maya/20.png" /></div>
+  <h1>Maya Calendar</h1>
+  <div class="column"><div id="year"></div>
+    <div class="column"><img src="maya/1.png" /></div>
+    <div class="column"><img src="maya/20.png" /></div>
+    <div class="column"><img src="maya/20.png" /></div>
     <br />13 . 20 . 20
   </div>
-  <div id="date">December 25<br />
-    <div><img src="maya/4.png" /></div>
-    <div><img src="maya/5.png" /></div>
+  <div class="column" id="date"><div id="gregorian"></div>
+    <div class="column"><img src="maya/4.png" /></div>
+    <div class="column"><img src="maya/5.png" /></div>
     <br />Yax 15
   </div>
-  <div>11:59 pm<br />
-    <div><img src="maya/20.png" /></div>
-    <div><img src="maya/20.png" /></div>
-    <div><img id="glyph_minutes" src="maya/2.png" /></div>
+  <div class="column"><div id="time"></div>
+    <div class="column"><img src="maya/20.png" /></div>
+    <div class="column"><img src="maya/20.png" /></div>
+    <div class="column"><img id="glyph_minutes" src="maya/2.png" /></div>
     <br />20 . 20 . 19
   </div>
-  <div><div id="num_seconds"></div><br /><img id="glyph_seconds" src="maya/3.png" /></div>
+  <div><div class="column" id="num_seconds"></div><br /><img id="glyph_seconds" src="maya/3.png" /></div>
 <script>
-var seconds = 0;
-function do_time () {
-  seconds = (seconds+1) % 60;
-  document.getElementById("num_seconds").innerHTML = seconds;
-  window.setTimeout(do_time, 1000);
-}
+//var seconds = 0;
+
+//function do_time () {
+//  seconds = (seconds+1) % 60;
+//  document.getElementById("num_seconds").innerHTML = seconds;
+//  window.setTimeout(do_time, 1000);
+//}
 
 var glyph = 1;
 var min_glyph = 2;
+
+function do_time() {
+  mkTime();
+  window.setTimeout(do_time, 1000);
+}
 
 function do_glyph () {
   if (glyph === 20) {
@@ -67,10 +80,37 @@ function do_glyph () {
   window.setTimeout(do_glyph, 540);
 }
 
+var mkDate = (function () {
+  var m_name = [ "January", "February", "March", "April", "May", "June",
+                 "July", "August", "September", "October", "November", "December" ];
+  return function() {
+    var d = new Date();
+    document.getElementById("gregorian").innerHTML = m_name[d.getMonth()] + " " + d.getDate();
+  };
+})();
+
+var mkYear = function () {
+  var d = new Date();
+  document.getElementById("year").innerHTML = d.getFullYear();
+}
+
+var mkTime = function () {
+  var d = new Date();
+  var m = d.getMinutes();
+  var s = d.getSeconds();
+  if (m < 10) { m = "0" + m; }
+  if (s < 10) { s = "0" + s; }
+  document.getElementById("time").innerHTML = d.getHours() + ":" + m + ":" + s;
+}
+
+mkYear();
+mkDate();
+mkTime();
 do_glyph();  
-//do_time();
+do_time();
+
 </script>
-<div style="float:none">
+<div>
 <br />
 <br />
 <small>
@@ -79,6 +119,9 @@ the 20 day month and 20/400/8,000-year long cycles, that we can
 further divide each day into 20ths (1 Maya "hour" = 1.2 Imperial
 hours), 400ths (3.6 Imperial minutes), and so on down.
 </small>
+<br />
+<br />
+<a href="https://github.com/EmbeddedLinuxGuy/mcal">fork</a>
 </div>
 </body>
 </html>
