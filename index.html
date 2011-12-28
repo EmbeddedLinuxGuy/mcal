@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+<title>Maya Calandar</title>
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#num_seconds {
+  float: none;
+  border: none
+}
+div {
+  float: left;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+div#date {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+</style>
+</head>
+<body>
+  <h1>Maya Calandar Countdown to Winter Solstice 2012</h1>
+  <div>2011<br />
+    <div><img src="maya/1.png" /></div>
+    <div><img src="maya/20.png" /></div>
+    <div><img src="maya/20.png" /></div>
+    <br />13 . 20 . 20
+  </div>
+  <div id="date">December 25<br />
+    <div><img src="maya/4.png" /></div>
+    <div><img src="maya/5.png" /></div>
+    <br />Yax 15
+  </div>
+  <div>11:59 pm<br />
+    <div><img src="maya/20.png" /></div>
+    <div><img src="maya/20.png" /></div>
+    <div><img id="glyph_minutes" src="maya/2.png" /></div>
+    <br />20 . 20 . 19
+  </div>
+  <div><div id="num_seconds"></div><br /><img id="glyph_seconds" src="maya/3.png" /></div>
+<script>
+var seconds = 0;
+function do_time () {
+  seconds = (seconds+1) % 60;
+  document.getElementById("num_seconds").innerHTML = seconds;
+  window.setTimeout(do_time, 1000);
+}
+
+var glyph = 1;
+var min_glyph = 2;
+
+function do_glyph () {
+  if (glyph === 20) {
+    min_glyph = 1 + (min_glyph % 20);
+    var shown_glyph = 1 + (min_glyph % 6);
+    document.getElementById("glyph_minutes").src = "maya/" + shown_glyph + ".png";
+  }
+  glyph = 1 + (glyph % 20);
+  var shown_glyph = 1 + (glyph % 6);
+  document.getElementById("glyph_seconds").src = "maya/" + shown_glyph + ".png";
+  window.setTimeout(do_glyph, 540);
+}
+
+do_glyph();  
+//do_time();
+</script>
+<div style="float:none">
+<br />
+<br />
+<small>
+The Maya calendar works on base 20. We may readily extrapolate from
+the 20 day month and 20/400/8,000-year long cycles, that we can
+further divide each day into 20ths (1 Maya "hour" = 1.2 Imperial
+hours), 400ths (3.6 Imperial minutes), and so on down.
+</small>
+</div>
+</body>
+</html>
