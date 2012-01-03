@@ -13,7 +13,7 @@ var maya_month = [
 ];
 
 function init_time (when) {
-    var ny = 1324465860; //13.20.20 1.1 1.1.1 === 1324465860
+    var ny = 1324465860;//13.20.20 1.1 1.1.1 = 1324465860 = Dec 21 2011 11:11 +0
     var s = Math.floor(when/1000) - ny;
     var t = s % 86400;
     
@@ -24,7 +24,7 @@ function init_time (when) {
     cal.mmin = 1 + Math.floor(t / 216);
     t = t % 216;
     cal.msec = 1 + Math.floor(t / 10.8);
-    cal.mjif = t % 11; // close enough
+    cal.mjif = 0;
 
     s = Math.floor(s/86400);
     cal.mdate = 1 + s % 20;
@@ -85,22 +85,20 @@ var mkYear = function () {
 var mkTime = function () {
     var d = new Date();
     var m = d.getMinutes();
-//  var s = d.getSeconds();
     if (m < 10) { m = "0" + m; }
-//  if (s < 10) { s = "0" + s; }
-    document.getElementById("time").innerHTML = d.getHours() + ":" + m;// + ":" + s;
+    document.getElementById("time").innerHTML = d.getHours() + ":" + m;
 }
 
-
-var d = new Date();
-mcal = init_time(d.getTime());
-redrawGlyphs();
-
-mkYear();
-mkDate();
-mkTime();
-do_glyph();  
-do_time();
+function maya_calendar() {
+    var d = new Date();
+    mcal = init_time(d.getTime());
+    redrawGlyphs();
+    mkYear();
+    mkDate();
+    mkTime();
+    do_glyph();  
+    do_time();
+}
 
 function makeGlyph() {
     var when = new Date(document.getElementById("textdate").value);
@@ -110,13 +108,4 @@ function makeGlyph() {
     document.getElementById("sdate").innerHTML = cal.mmonth + " . " + cal.mdate;
 }
 
-//December 21 11:11:00am GMT 2012
-//=== 1356088260
-//=== 14.1.1 1.1 1.1.1
-
-// not used
-var maya_day = [
-    "Imix", "Ik", "Akbal", "Kan", "Chicchan", "Cimi",
-    "Manik", "Lamat", "Muluc", "Oc", "Chuen", "Eb", "Ben",
-    "Ix", "Men", "Cib", "Caban", "Etznab", "Cauac", "Ahau"
-];
+maya_calendar();
