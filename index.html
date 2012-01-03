@@ -32,7 +32,7 @@ div {
 </style>
 </head>
 <body>
-  <h1>Maya Calendar</h1>
+  <h1>Maya Hacker Calendar</h1>
   <div class="column"><div id="year"></div>
     <div class="column"><img src="maya/13.png" /></div>
     <div class="column"><img src="maya/20.png" /></div>
@@ -53,18 +53,108 @@ div {
   <div><div class="column" id="num_seconds"></div><br /><img id="glyph_seconds" src="maya/20.png" /></div>
 <script src="mcal.js"></script>
 <div>
-<!-- <img src="maya/cal.gif" /> -->
-<br />
-<br />
-<small>
-The Maya calendar works on base 20. We may readily extrapolate from
-the 20 day month and 20/400/8,000-year long cycles, that we can
-further divide each day into 20ths (1 Maya "hour" = 1.2 Imperial
-hours), 400ths (3.6 Imperial minutes), and so on down.
-</small>
+<br /><br />
+<h1>Upcoming</h1>
+<table>
+<tr>
+  <td><img src="maya/3.png" /></td>
+  <td><img src="maya/1.png" /></td>
+  <td>Transmediale</td>
+  <td>Berlin</td>
+</tr>
+<tr>
+  <td><img src="maya/4.png" /></td>
+  <td><img src="maya/5.png" /></td>
+  <td>Assembly Winter</td>
+  <td>Helsinki</td>
+</tr>
+<tr>
+  <td><img src="maya/4.png" /></td>
+  <td><img src="maya/13.png" /></td>
+  <td>BIL</td>
+  <td>Long Beach</td>
+</tr>
+<tr>
+  <td><img src="maya/6.png" /></td>
+  <td><img src="maya/13.png" /></td>
+  <td>Notacon 9</td>
+  <td>Cleveland</td>
+</tr>
+<tr>
+  <td><img src="maya/10.png" /></td>
+  <td><img src="maya/17.png" /></td>
+  <td>SoOnCamp</td>
+  <td>Ontario</td>
+</tr>
+<tr>
+  <td><img src="maya/11.png" /></td>
+  <td><img src="maya/5.png" /></td>
+  <td>HOPE 9</td>
+  <td>New York</td>
+</tr>
+<tr>
+  <td><img src="maya/11.png" /></td>
+  <td><img src="maya/18.png" /></td>
+  <td>DEF CON 20</td>
+  <td>Las Vegas</td>
+</tr>
+<tr>
+  <td><img src="maya/12.png" /></td>
+  <td><img src="maya/7.png" /></td>
+  <td>Assembly Summer</td>
+  <td>Helsinki</td>
+</tr>
+<tr>
+  <td><img src="maya/13.png" /></td>
+  <td><img src="maya/13.png" /></td>
+  <td>Ars Electronica</td>
+  <td>Linz</td>
+</tr>
+<tr>
+  <td><img src="maya/14.png" /></td>
+  <td><img src="maya/17.png" /></td>
+  <td>Strange Loop</td>
+  <td>St. Louis</td>
+</tr>
+<tr>
+  <td><img src="maya/18.png" /></td>
+  <td><img src="maya/11.png" /></td>
+  <td>Roboexotica</td>
+  <td>Vienna</td>
+</tr>
+<tr>
+  <td><img src="maya/wayeb.jpg" /></td>
+  <td><img src="maya/5.png" /></td>
+  <td>Worlds ends</td>
+  <td>Various locations</td>
+</tr>
+</table>
+</div>
+<div>
 <br />
 <br />
 <a href="https://github.com/EmbeddedLinuxGuy/mcal">source</a>
 </div>
+<div id="about">
+<br />
+<br />
+<small>
+Note on times: the Maya calendar works on base 20. We may readily extrapolate from
+the 20 day month and 20/400/8,000-year long cycles, that we can
+further divide each day into 20ths (1 Maya "hour" = 1.2 Imperial
+hours), 400ths (3.6 Imperial minutes), 8000ths, etc.
+</small>
+</div>
+<div>
+<br /><br />
+<img src="maya/cal.gif" />
+</div>
+<div>
+<br /><br />
+<input type="text" id="textdate" />
+<input type="button" onClick="makeGlyph()" value="?" />
+<img id="icm" />
+<img id="icd" />
+<div id="sdate"></div>
 </body>
 </html>

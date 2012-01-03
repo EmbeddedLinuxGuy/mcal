@@ -12,24 +12,26 @@ var maya_month = [
     "Sak", "Keh", "Mak", "Kankin", "Muwan", "Pax", "Kayab", "Kumku", "Wayeb"
 ];
 
-function init_time () {
+function init_time (when) {
     var ny = 1324465860; //13.20.20 1.1 1.1.1 === 1324465860
-    var d = new Date();
-    var s = Math.floor(d.getTime()/1000) - ny;
+    var s = Math.floor(when/1000) - ny;
     var t = s % 86400;
     
-    mcal.mhr = 1 + Math.floor(t / 4320);
+    var cal = {};
+
+    cal.mhr = 1 + Math.floor(t / 4320);
     t = t % 4320;
-    mcal.mmin = 1 + Math.floor(t / 216);
+    cal.mmin = 1 + Math.floor(t / 216);
     t = t % 216;
-    mcal.msec = 1 + Math.floor(t / 10.8);
+    cal.msec = 1 + Math.floor(t / 10.8);
+    cal.mjif = t % 11; // close enough
 
     s = Math.floor(s/86400);
-    mcal.mdate = 1 + s % 20;
+    cal.mdate = 1 + s % 20;
     s = Math.floor(s/20);
-    mcal.mmonth = 1 + s % 20;
+    cal.mmonth = 1 + s % 20;
 
-    redrawGlyphs();
+    return cal;
 }
 
 function redrawGlyphs() {
@@ -89,7 +91,10 @@ var mkTime = function () {
     document.getElementById("time").innerHTML = d.getHours() + ":" + m;// + ":" + s;
 }
 
-init_time();
+
+var d = new Date();
+mcal = init_time(d.getTime());
+redrawGlyphs();
 
 mkYear();
 mkDate();
@@ -97,6 +102,13 @@ mkTime();
 do_glyph();  
 do_time();
 
+function makeGlyph() {
+    var when = new Date(document.getElementById("textdate").value);
+    var cal = init_time(when.getTime());
+    document.getElementById("icm").src = "maya/" + cal.mmonth + ".png";
+    document.getElementById("icd").src = "maya/" + cal.mdate + ".png";
+    document.getElementById("sdate").innerHTML = cal.mmonth + " . " + cal.mdate;
+}
 
 //December 21 11:11:00am GMT 2012
 //=== 1356088260
